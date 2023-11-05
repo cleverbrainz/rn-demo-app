@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Dimensions, ScrollView, Text, View} from 'react-native';
+import {Dimensions, ScrollView} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import styled from '@emotion/native';
@@ -7,7 +7,6 @@ import styled from '@emotion/native';
 import {faker} from '@faker-js/faker';
 import {RootStackParamList} from './stack';
 import {getImage} from './utils/image';
-import {Container} from './components/container';
 import {Typography} from './components/typography';
 import {DetailsLine} from './components/details-line';
 import {DetailsTitle} from './components/details-title';
@@ -32,14 +31,15 @@ export const Item = () => {
 
   const [quantity, setQuantity] = useState<number>(5);
 
+  React.useEffect(() => {
+    nav.setOptions({
+      title: params?.name,
+    });
+  }, [nav, params]);
+
   if (!params) {
     return <Typography>Loading ...</Typography>;
   }
-
-  nav.setOptions({
-    title: params.name,
-  });
-
   //
   //
 
@@ -82,9 +82,7 @@ export const Item = () => {
           <Typography weight="medium" />
           <Typography weight="medium">Specifications</Typography>
           <DetailsLine label="Type">{SPEC_3}</DetailsLine>
-          <DetailsLine label="Weight">
-            {SPEC_4} kg
-          </DetailsLine>
+          <DetailsLine label="Weight">{`${SPEC_4} kg`}</DetailsLine>
         </Container>
       </ScrollView>
 
@@ -95,6 +93,10 @@ export const Item = () => {
 
 //
 //
+export const Container = styled.View({
+  paddingHorizontal: 25,
+  paddingVertical: 8,
+});
 
 const ItemImage = styled.Image<{size: number}>(props => ({
   width: props.size,

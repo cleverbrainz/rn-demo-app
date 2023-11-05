@@ -1,7 +1,8 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import ListScreen, { IListItem } from './screens/list';
+import ListScreen from './screens/list';
+import {IListItem} from './types';
 import {Item} from './item';
 
 import {ThemeFont} from './components/typography';
@@ -19,7 +20,7 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 const Stack = () => {
   return (
     <RootStack.Navigator
-      initialRouteName="ListScreens"
+      initialRouteName="ListScreen"
       screenOptions={{
         headerShadowVisible: false,
         headerBackTitle: '',

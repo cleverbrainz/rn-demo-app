@@ -1,6 +1,5 @@
 import React, {Dispatch, SetStateAction} from 'react';
 import styled from '@emotion/native';
-
 import {Typography} from './typography';
 
 //
@@ -18,13 +17,9 @@ export const CartQuantity: React.FC<{
           underlayColor="#EDEBF2">
           <Typography color="#522973">+</Typography>
         </QuantityButton>
-
-        <Typography style={{textAlign: 'center', flex: 1}}>
-          {quantity}
-        </Typography>
-
+        <QuantityLabel>{quantity}</QuantityLabel>
         <QuantityButton
-          onPress={() => update(quantity + 1)}
+          onPress={() => update(quantity > 1 ? quantity - 1 : quantity)}
           underlayColor="#EDEBF2">
           <Typography color="#522973">-</Typography>
         </QuantityButton>
@@ -35,6 +30,15 @@ export const CartQuantity: React.FC<{
 
 //
 //
+
+const QuantityLabel = styled(Typography)({
+  textAlign: 'center',
+  flex: 1,
+});
+
+QuantityLabel.defaultProps = {
+  fontSize: 16,
+};
 
 const QuantityButton = styled.TouchableHighlight({
   alignItems: 'center',
